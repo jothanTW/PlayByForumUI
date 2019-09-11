@@ -85,13 +85,13 @@ function loadHome() {
                                 let fsz = fs[0].cloneNode(true);
                                 fgsz.appendChild(fsz);
                                 let fst = fsz.getElementsByClassName("forum-bar-title");
-                                if (fst.length > 0) {
-                                    fst[0].innerHTML = forum.title;
-                                    fst[0].href = "#/forum/" + forum.id;
+                                for (let fsti of fst) {
+                                    fsti.innerHTML = forum.title;
+                                    fsti.href = "#/forum/" + forum.id;
                                 }
                                 let fsfn = fsz.getElementsByClassName("forum-bar-threads");
                                 if (fsfn.length > 0) {
-                                    fsfn[0].innerHTML = forum.threads;
+                                    fsfn[0].innerHTML = forum.threadnum;
                                 }
                                 let fspn = fsz.getElementsByClassName("forum-bar-posts");
                                 if (fspn.length > 0) {
@@ -129,9 +129,75 @@ function loadForumPage(forumpath) {
             let mdiv = document.getElementById("single-page-space");
             mdiv.innerHTML = template.innerHTML;
             let ptitles = mdiv.getElementsByClassName("forum-page-title");
-            for (pt of ptitles) { pt.innerHTML = data.name; }
-            let sfbox = mdiv.getElementsByClassName("sub-forum-box");
+            for (let pt of ptitles) { pt.innerHTML = data.name; }
 
+            //subforums
+            let sfboxes = mdiv.getElementsByClassName("sub-forum-box");
+            for (let sfbox of sfboxes) {
+                let sfbars = sfbox.getElementsByClassName("forum-title-bar");
+                let sfbartemp = null;
+                if (sfbars.length > 0) sfbartemp = sfbars[0];
+                for (let sfbar of sfbars) {
+                    sfbox.removeChild(sfbar);
+                }
+                if (data.subforums && data.subforums.length > 0 && sfbartemp) {
+                    for (datasf of data.subforums) {
+                        let sfbariter = sfbartemp.cloneNode(true);
+                        sfbox.appendChild(sfbariter);
+                        let sftitles = sfbariter.getElementsByClassName("forum-bar-title");
+                        for (let sftitle of sftitles) {
+                            sftitle.innerHTML = datasf.title;
+                        }
+                        let sfsubs = sfbariter.getElementsByClassName("forum-bar-sub");
+                        for (let sfsub of sfsubs) {
+                            let sfsubbars = sfsub.getElementsByClassName("sub-forum-bar");
+                            let sfsubbartemp = null;
+                            if (sfsubbars.length > 0) sfsubbartemp = sfsubbars[0];
+                            for (let sfsubbar of sfsubbars) {
+                                sfsub.removeChild(sfsubbar);
+                            }
+                            if (datasf.subforums && datasf.subforums.length > 0 && sfsubbartemp) {
+                                for (let datasfbar of datasf.subforums) {
+                                    let sfsubbariter = sfsubbartemp.cloneNode(true);
+                                    sfsub.appendChild(sfsubbariter);
+                                    sfsubbariter.innerHTML = datasfbar.title;
+                                }
+                            } else {
+                                sfsub.parentNode.removeChild(sfsub);
+                            }
+                        }
+                        let sfps = sfbariter.getElementsByClassName("forum-bar-posts");
+                        for (let sfp of sfps) { sfp.innerHTML = datasf.posts; } 
+                        let sfts = sfbariter.getElementsByClassName("forum-bar-threads");
+                        for (let sft of sfts) { sft.innerHTML = datasf.threadnum; } 
+                    }
+                }
+            }
+
+            // threads
+            let tboxes = mdiv.getElementsByClassName("thread-box");
+            for (let tbox of tboxes) {
+                let tbars = tbox.getElementsByClassName("thread-bar");
+                let tbartemp = null;
+                if (tbars.length > 0) tbartemp = tbars[0].cloneNode(true);
+                for (let tbar of tbars) tbar.parentElement.removeChild(tbar);
+                if (data.threads && data.threads.length > 0 && tbartemp) {
+                    for (let threaddata of data.threads) {
+                        let tbariter = tbartemp.cloneNode(true);
+                        tbox.appendChild(tbariter);
+                        let tbartitles = tbariter.getElementsByClassName("thread-title");
+                        for (let tbartitle of tbartitles) {
+                            tbartitle.innerHTML = threaddata.title;
+                        }
+                        let tbarposts = tbariter.getElementsByClassName("thread-posts");
+                        for (let tbarpost of tbarposts) tbarpost.innerHTML = threaddata.posts;
+                        let tbarviews = tbariter.getElementsByClassName("thread-views");
+                        for (let tbarview of tbarviews) tbarview.innerHTML = threaddata.views;
+                        let tbarlasts = tbariter.getElementsByClassName("thread-last-post");
+                        for (let tbarlast of tbarlasts) tbarlast.innerHTML = threaddata.last;
+                    }
+                }
+            }
         });
     });
 }

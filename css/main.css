@@ -20,6 +20,7 @@ html {
     background-color: grey;
     display: flex;
     justify-content: space-between;
+    padding-bottom: 10px;
 }
 
 .forum-group-stats {
@@ -53,10 +54,6 @@ html {
     padding-top: 10px;
 }
 
-.forum-group-stats > div {
-    padding-bottom: 10px;
-}
-
 .forum-bar-sub {
     display: flex;
     font-size: 0.7em;
@@ -65,4 +62,117 @@ html {
 
 .sub-forum-bar {
     padding-left: 5px;
+}
+
+.sub-forum-box {
+    border: 3px solid grey;
+    border-radius: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 10px;
+    background-color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sub-forum-box .forum-title-bar {
+    background-color: white;
+}
+
+.sub-forum-header {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: grey;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.sub-forum-box-header {
+    flex-grow: 1;
+}
+
+.sub-forum-threads, .sub-forum-posts {
+    width: 100px;
+    max-width: 100px;
+    text-align: center;
+    border-left: 2px solid grey;
+}
+
+.forum-title-bar {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+
+.thread-box {
+    border: 3px solid grey;
+    border-radius: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 10px;
+    background-color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.thread-header {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.thread-header > div {
+    width: 100px;
+    max-width: 100px;
+    text-align: center;
+    border-left: 2px solid grey;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.thread-header > .thread-last-post-header {
+    width: 200px;
+    max-width: 200px;
+}
+
+.thread-bar {
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid grey;
+    justify-content: space-between;
+}
+
+.thread-stats>div {
+    border-left: 2px solid grey;
+    width: 100px;
+    max-width: 100px;
+    padding: 10px;
+    
+    text-align: center;
+}
+
+.thread-stats > .thread-last-post {
+    border-left: 2px solid grey;
+    width: 200px;
+    max-width: 200px;
+    padding: 10px;
+}
+
+.thread-stats {
+    display: flex;
+}
+
+.thread-text {
+    padding: 10px;
+}
+
+.thread-header .thread-box-header {
+    flex-grow:1;
+    width: auto;
+    max-width: initial;
+    text-align: left;
 }

@@ -4,10 +4,24 @@
     "subforums": [
         {
             "title": "aaaa",
-            "id": "aaaa"
+            "id": "aaaa",
+            "posts": 123,
+            "threadnum": 456,
+            "subforums": [
+                {
+                    "title": "bb",
+                    "id": "bb"
+                },
+                {
+                    "title": "cc",
+                    "id": "cc"
+                }
+            ]
         },
         {
             "title": "aaaAAAAAAAA",
+            "posts": 123,
+            "threadnum": 456,
             "id": "aaaaaaaaaaa"
         }
     ],
